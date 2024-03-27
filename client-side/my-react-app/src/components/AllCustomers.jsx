@@ -51,6 +51,7 @@ function AllCustomers() {
                     <Table>
                         <TableHead>
                             <TableRow>
+                               <TableCell></TableCell>
                                 <TableCell>Id</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Address</TableCell>
@@ -65,6 +66,7 @@ function AllCustomers() {
                             {allCustomers.map((cus) => {
                                 return (
                                     <TableRow key={cus.id}>
+                                        <TableCell onClick={() => openInfo(cus.id)}><img src={cus.img}></img></TableCell>
                                         <TableCell onClick={() => openInfo(cus.id)}>{cus.id}</TableCell>
                                         <TableCell onClick={() => openInfo(cus.id)}>{cus.lastName} {cus.firstName}</TableCell>
                                         <TableCell onClick={() => openInfo(cus.id)}>{cus.cuntry} {cus.street} {cus.numBuilding}</TableCell>

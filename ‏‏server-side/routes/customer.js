@@ -31,6 +31,7 @@ router.get('/Information/:id', async function (req, res, next) {
     }
 });
 
+// router.put('/UpdateCustomer', customer.upload.single('file'), async function (req, res, next) {
 router.put('/UpdateCustomer', async function (req, res, next) {
     try {
         res.json(await customer.UpdateCustomer(req.body));
@@ -40,6 +41,7 @@ router.put('/UpdateCustomer', async function (req, res, next) {
     }
 });
 
+// router.put('/CreateCustomer', customer.upload.single('file'), async function (req, res, next) {
 router.put('/CreateCustomer', async function (req, res, next) {
     try {
         res.json(await customer.CreateCustomer(req.body));

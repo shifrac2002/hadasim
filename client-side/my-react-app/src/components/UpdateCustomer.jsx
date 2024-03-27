@@ -5,6 +5,8 @@ function UpdateCustomer() {
     const location = useLocation();
     let navigate = useNavigate();
     const [customer, setcustomer] = useState(location.state ? location.state.customer : { id: '', firstName: '', lastName: '', cuntry: '', street: '', numBuilding: '', phone: '', cellphone: '', DateOfBirth: '' })
+    // const [image, setImage] = useState({ preview: '', data: '' })
+    // const [imageName, setImageName] = useState('')
 
     function updateID(e) {
         const value = e.target.value;
@@ -18,6 +20,20 @@ function UpdateCustomer() {
             alert("the id is not valid")
         }
     }
+
+    // function handleFileChange(e) {
+    //     debugger
+    //     const value = e.target.files[0].name;
+    //     setcustomer({
+    //         ...customer,
+    //         img: value
+    //     });
+    //     const img = {
+    //         preview: URL.createObjectURL(e.target.files[0]),
+    //         data: e.target.files[0],
+    //     }
+    //     setImage(img);
+    // }
 
     function updateFirstName(e) {
         const value = e.target.value;
@@ -99,14 +115,28 @@ function UpdateCustomer() {
         }
     }
 
-    async function CreateOrUpdateClicked() {
+    async function CreateOrUpdateClicked(e) {
+        e.preventDefault()
         if (customer.id === '' || customer.firstName === '' || customer.lastName === '' || customer.cuntry === '' || customer.street === '' || customer.numBuilding === '' || customer.phone === '' || customer.cellphone === '' || customer.DateOfBirth === '') {
             alert("ther is field not full")
         }
-        if (location.state) {
+        // let formData = new FormData();
+        //     formData.append('id', customer.id);
+        //     formData.append('firstName', customer.firstName);
+        //     formData.append('cuntry', customer.cuntry);
+        //     formData.append('DateOfBirth', customer.DateOfBirth);
+        //     formData.append('phone', customer.phone);
+        //     formData.append('cellphone', customer.cellphone);
+        //     formData.append('lastName', customer.lastName);
+        //     formData.append('street', customer.street);
+        //     formData.append('numBuilding', customer.numBuilding);
+        //     formData.append('img', imageName);
+        //     formData.append('file', image.data);
+        if (location.state) {       
             const url = 'http://localhost:6200/api/Customer/UpdateCustomer';
             let response = await fetch(url, {
                 method: 'PUT',
+                // body: formData,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -119,6 +149,7 @@ function UpdateCustomer() {
             const url = 'http://localhost:6200/api/Customer/CreateCustomer';
             let response = await fetch(url, {
                 method: 'PUT',
+                // body: formData,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -134,7 +165,7 @@ function UpdateCustomer() {
             navigate('/')
         }
     }
-    
+
     return (
         <div>
             {location.state && <h1>update customer</h1>}
@@ -160,7 +191,13 @@ function UpdateCustomer() {
             <h2>date of birth</h2>
             {location.state && <input type="date" value={location.state.customer.DateOfBirth} onChange={updateDateOfBirth}></input>}
             {!location.state && <input type="date" onChange={updateDateOfBirth}></input>}
-            <button onClick={() => { CreateOrUpdateClicked() }}>אישור</button>
+            {/* <div>
+                <h2>Upload Image</h2>
+                {image.preview && <img src={image.preview} width='100' height='100' />}
+                <hr></hr>
+                <input type='file' name='file' onChange={handleFileChange}></input>
+            </div> */}
+            <button onClick={CreateOrUpdateClicked}>אישור</button>
         </div>);
 }
 export default UpdateCustomer;

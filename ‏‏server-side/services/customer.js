@@ -1,5 +1,6 @@
 const db = require('./db');
 const config = require('../config');
+// const multer = require('multer');
 
 async function getAllCustomer() {
     return await db.query(
@@ -27,6 +28,7 @@ async function UpdateCustomer(customrToUpdate) {
         street='${customrToUpdate.street}',
         numBuilding='${customrToUpdate.numBuilding}'
         WHERE id='${customrToUpdate.id}'`
+        // img='http://localhost:6200/${customrToUpdate.img}',
     );
 }
 
@@ -43,8 +45,10 @@ async function CreateCustomer(customrToCreate) {
         '${customrToCreate.cellPhone}',
         '${customrToCreate.lastName}',
         '${customrToCreate.street}',
-        '${customrToCreate.numBuilding}');`
+        '${customrToCreate.numBuilding}',);`
         );
+        // ,img
+        // 'http://localhost:6200/${customrToUpdate.img}'
         return true
     }
     else {
@@ -69,6 +73,19 @@ async function CustomerInformation(id) {
     return info;
 }
 
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         console.log("yhth0");
+//         cb(null, 'images/')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.originalname)
+//     },
+// })
+
+// const upload = multer({ storage: storage })
+
 module.exports = {
     getAllCustomer, DeleteCustomer, UpdateCustomer, CreateCustomer, CustomerInformation
+    // , storage, upload
 }

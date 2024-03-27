@@ -104,15 +104,11 @@ function UpdateCustomer() {
     function updateDateOfBirth(e) {
         debugger
         const value = e.target.value;
-        if (value > new Date()) {
-            alert("tha date of birth not valid")
-        }
-        else {
-            setcustomer({
-                ...customer,
-                DateOfBirth: value.slice(0, 10)
-            });
-        }
+        setcustomer({
+            ...customer,
+            DateOfBirth: value.slice(0, 10)
+        });
+
     }
 
     async function CreateOrUpdateClicked(e) {
@@ -132,7 +128,7 @@ function UpdateCustomer() {
         //     formData.append('numBuilding', customer.numBuilding);
         //     formData.append('img', imageName);
         //     formData.append('file', image.data);
-        if (location.state) {       
+        if (location.state) {
             const url = 'http://localhost:6200/api/Customer/UpdateCustomer';
             let response = await fetch(url, {
                 method: 'PUT',
